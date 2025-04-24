@@ -1,6 +1,8 @@
 <template>
   <div class="appbar-container">
-    <v-icon class="back-arrow" @click="navigateBack"> mdi-arrow-left </v-icon>
+    <v-icon v-if="showBackButton" class="back-arrow" @click="navigateBack">
+      mdi-arrow-left
+    </v-icon>
     <div class="text-h5">{{ title }}</div>
   </div>
   <v-divider></v-divider>
@@ -12,18 +14,15 @@ import { useRouter } from "vue-router";
 
 const props = defineProps<{
   title: string;
-  backRoute: string;
+  showBackButton?: boolean;
+  backRoute?: string;
 }>();
 
 const router = useRouter();
 
-// Function to handle navigation back
 const navigateBack = () => {
-  if (props.backRoute) {
-    router.push(props.backRoute);
-  } else {
-    router.back();
-  }
+  if (!props.showBackButton) return;
+  router.push({ name: props.backRoute });
 };
 </script>
 

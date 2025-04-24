@@ -1,13 +1,13 @@
 <template>
   <v-navigation-drawer v-if="!mobile" app permanent>
     <div class="mt-4">
-      <v-col cols="12" class="font-weight-bold">VERSO System Management</v-col>
+      <v-col cols="12" class="font-weight-bold">Supply Chain Management</v-col>
       <v-col cols="12" v-for="(item, index) in menuItems" :key="index">
         <router-link
           :to="{ name: item.link }"
-          class="d-flex items-center justify-start ga-4 mx-4"
+          class="d-flex align-center justify-start ga-4"
         >
-          <v-icon size="22" :color="item.isActive ? '#646cff' : 'grey'">
+          <v-icon size="22" :color="item.isActive ? '#1867c0' : 'grey'">
             {{ item.icon }}
           </v-icon>
           <span class="navigation-title" :class="{ active: item.isActive }">
@@ -18,15 +18,15 @@
     </div>
   </v-navigation-drawer>
 
-  <v-bottom-navigation v-if="mobile" app height="64">
+  <v-bottom-navigation v-else app height="64">
     <v-btn
       v-for="(item, index) in menuItems"
       :key="index"
       :to="{ name: item.link }"
       icon
-      :color="item.isActive ? '#646cff' : 'grey'"
+      :color="item.isActive ? '#1867c0' : 'grey'"
     >
-      <v-icon :color="item.isActive ? '#646cff' : 'grey'">
+      <v-icon :color="item.isActive ? '#1867c0' : 'grey'">
         {{ item.icon }}
       </v-icon>
     </v-btn>
@@ -65,7 +65,7 @@ const menuItems = computed(() => [
   color: grey;
 
   &.active {
-    color: #646cff;
+    color: #1867c0;
   }
 }
 

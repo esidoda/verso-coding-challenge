@@ -1,0 +1,193 @@
+{
+  "products": [
+    {
+      "id": "1e5e",
+      "name": "Product A",
+      "price": "30",
+      "description": "This is product A",
+      "createdAt": "2025-04-24T10:26:34.970Z"
+    },
+    {
+      "id": "22f5",
+      "name": "Product B",
+      "price": "50",
+      "description": "This is a description about product b",
+      "createdAt": "2025-04-24T10:38:16.875Z"
+    },
+    {
+      "id": "c282",
+      "name": "Product C",
+      "price": "45",
+      "description": "Updated",
+      "createdAt": "2025-04-24T10:57:30.823Z",
+      "updatedAt": "2025-04-24T10:59:02.419Z"
+    },
+    {
+      "id": "0491",
+      "name": "Product D",
+      "price": "10",
+      "description": "",
+      "createdAt": "2025-04-24T11:12:18.111Z"
+    },
+    {
+      "id": "85d8",
+      "name": "Product E",
+      "price": "20",
+      "description": "",
+      "createdAt": "2025-04-24T11:12:27.924Z"
+    },
+    {
+      "id": "007a",
+      "name": "Product F",
+      "price": "20",
+      "description": "",
+      "createdAt": "2025-04-24T11:12:37.044Z"
+    },
+    {
+      "id": "d9d6",
+      "name": "Product G",
+      "price": "10",
+      "description": "",
+      "createdAt": "2025-04-24T11:12:48.074Z"
+    },
+    {
+      "id": "ecff",
+      "name": "Product H",
+      "price": "20",
+      "description": "",
+      "createdAt": "2025-04-24T11:12:58.798Z"
+    },
+    {
+      "id": "5650",
+      "name": "Product I",
+      "price": "40",
+      "description": "",
+      "createdAt": "2025-04-24T11:13:03.935Z"
+    },
+    {
+      "id": "3f8a",
+      "name": "Product J",
+      "price": "20",
+      "description": "",
+      "createdAt": "2025-04-24T11:13:13.467Z"
+    },
+    {
+      "id": "18ba",
+      "name": "Product K",
+      "price": "48",
+      "description": "",
+      "createdAt": "2025-04-24T11:13:23.405Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "orderItems": [
+        {
+          "product": {
+            "id": 1,
+            "name": "Keyboard",
+            "description": "Mechanical keyboard",
+            "price": 59.99,
+            "createdAt": "2025-04-23T00:00:00.000Z"
+          },
+          "quantity": 2
+        }
+      ],
+      "customerCompany": {
+        "id": 1,
+        "name": "Customer A"
+      },
+      "supplierCompany": {
+        "id": 1,
+        "name": "Supplier A"
+      },
+      "totalPrice": 119.98,
+      "createdAt": "2025-04-23T00:00:00.000Z"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": 1,
+      "name": "Supplier A"
+    },
+    {
+      "id": 2,
+      "name": "Supplier B"
+    },
+    {
+      "id": 3,
+      "name": "Supplier C"
+    },
+    {
+      "id": 4,
+      "name": "Supplier D"
+    },
+    {
+      "id": 5,
+      "name": "Supplier E"
+    },
+    {
+      "id": 6,
+      "name": "Supplier F"
+    },
+    {
+      "id": 7,
+      "name": "Supplier G"
+    },
+    {
+      "id": 8,
+      "name": "Supplier H"
+    },
+    {
+      "id": 9,
+      "name": "Supplier I"
+    },
+    {
+      "id": 10,
+      "name": "Supplier J"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Customer A"
+    },
+    {
+      "id": 2,
+      "name": "Customer B"
+    },
+    {
+      "id": 3,
+      "name": "Customer C"
+    },
+    {
+      "id": 4,
+      "name": "Customer D"
+    },
+    {
+      "id": 5,
+      "name": "Customer E"
+    },
+    {
+      "id": 6,
+      "name": "Customer F"
+    },
+    {
+      "id": 7,
+      "name": "Customer G"
+    },
+    {
+      "id": 8,
+      "name": "Customer H"
+    },
+    {
+      "id": 9,
+      "name": "Customer I"
+    },
+    {
+      "id": 10,
+      "name": "Customer J"
+    }
+  ]
+}

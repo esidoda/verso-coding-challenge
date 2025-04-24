@@ -1,4 +1,3 @@
-
 import type { Router } from "vue-router";
 import ProductsListPage from "./views/ProductsListPage.vue";
 import AddProductPage from "./views/AddProductPage.vue";
@@ -12,13 +11,13 @@ export default (router: Router) => {
   });
 
   router.addRoute({
-    path: "/orders/add",
+    path: "/products/add",
     name: "add-product",
     component: AddProductPage,
   });
 
   router.addRoute({
-    path: "/orders/edit",
+    path: "/products/edit/:id",
     name: "edit-product",
     component: EditProductPage,
   });
