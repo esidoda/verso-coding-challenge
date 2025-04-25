@@ -17,7 +17,7 @@ export default (router: Router) => {
   });
 
   router.addRoute({
-    path: "/orders/edit",
+    path: "/orders/edit/:id",
     name: "edit-order",
     component: EditOrderPage,
   });

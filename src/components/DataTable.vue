@@ -34,31 +34,112 @@
       :message="`An error occurred while fetching the data.`"
       :type="'error'"
     />
-
     <v-data-table
       :items="items"
       :headers="headers"
       :search="search"
       :loading="isLoading"
+      :show-expand="isExpandable"
     >
-      <template v-slot:item="{ item }">
-        <tr>
-          <td v-for="header in headers" :key="header.value">
-            <span v-if="item[header.value]">{{ item[header.value] }}</span>
-            <div
-              class="d-flex align-end justify-end"
-              v-else-if="header.value === 'actions'"
-            >
-              <v-btn variant="text" small @click="onEditButtonClick(item)">
-                <v-icon dark>mdi-pencil</v-icon>
-              </v-btn>
+      <!-- Expandable Button Slot -->
+      <template
+        v-slot:item.data-table-expand="{
+          internalItem,
+          isExpanded,
+          toggleExpand,
+        }"
+      >
+        <v-btn
+          :append-icon="
+            isExpanded(internalItem) ? 'mdi-chevron-up' : 'mdi-chevron-down'
+          "
+          :text="isExpanded(internalItem) ? 'Collapse' : 'Expand'"
+          class="text-none"
+          color="medium-emphasis"
+          size="small"
+          variant="text"
+          slim
+          @click="toggleExpand(internalItem)"
+        ></v-btn>
+      </template>
 
-              <v-btn variant="text" small @click="onDeleteButtonClick(item)">
-                <v-icon dark>mdi-delete</v-icon>
-              </v-btn>
-            </div>
+      <!-- Expanded Row Slot -->
+      <template v-slot:expanded-row="{ columns, item }">
+        <tr>
+          <td :colspan="columns.length" class="py-2">
+            <v-sheet rounded="lg">
+              <v-table density="compact">
+                <thead>
+                  <tr class="bg-surface-light">
+                    <th v-for="header in expandableHeaders" :key="header.value">
+                      {{ header.title }}
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <template v-if="expandableValue">
+                    <tr
+                      v-for="(expandableItem, index) in item[expandableValue as keyof Entity]"
+                      :key="index"
+                    >
+                      <td
+                        v-for="header in expandableHeaders"
+                        :key="header.value"
+                      >
+                        <template
+                          v-if="header.valueLevelOne && !header.valueLevelTwo"
+                        >
+                          {{
+                            getNestedProperty(
+                              expandableItem,
+                              header.valueLevelOne
+                            )
+                          }}
+                        </template>
+
+                        <template
+                          v-if="header.valueLevelOne && header.valueLevelTwo"
+                        >
+                          {{
+                            getNestedProperty(
+                              expandableItem,
+                              header.valueLevelOne,
+                              header.valueLevelTwo
+                            )
+                          }}
+                        </template>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </v-table>
+            </v-sheet>
           </td>
         </tr>
+      </template>
+      <template v-slot:item.actions="{ item }">
+        <div class="d-flex ga-2 justify-end">
+          <v-btn
+            variant="text"
+            small
+            @click="onEditButtonClick(item)"
+            class="px-1"
+            min-width="20"
+          >
+            <v-icon dark>mdi-pencil</v-icon>
+          </v-btn>
+
+          <v-btn
+            variant="text"
+            small
+            @click="onDeleteButtonClick(item)"
+            class="px-1"
+            min-width="20"
+          >
+            <v-icon dark>mdi-delete</v-icon>
+          </v-btn>
+        </div>
       </template>
     </v-data-table>
   </div>
@@ -68,18 +149,29 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import MessageDisplay from "./MessageDisplay.vue";
+import type { TableHeader } from "@/types";
+import type { Order } from "@/modules/orders/types.orders";
+import type { Product } from "@/modules/products/types.products";
+import { useUtils } from "@/composables/useUtils";
 
 const props = defineProps<{
   isLoading: boolean;
   hasRequestFailed: boolean;
-  items: any[];
-  headers: any[];
+  items: Entity[];
+  headers: TableHeader[];
+  expandableHeaders?: TableHeader[];
   searchLabel: string;
   addButtonText: string;
   addButtonRoute: string;
   editButtonRoute: string;
+  isExpandable?: boolean;
+  expandableValue?: string;
+  collapseText?: string;
 }>();
 
+type Entity = Order | Product;
+
+const { getNestedProperty } = useUtils();
 const router = useRouter();
 const search = ref("");
 

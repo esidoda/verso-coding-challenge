@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer v-if="!mobile" app permanent>
-    <div class="mt-4">
+    <div class="mt-4 px-2">
       <v-col cols="12" class="font-weight-bold">Supply Chain Management</v-col>
       <v-col cols="12" v-for="(item, index) in menuItems" :key="index">
         <router-link

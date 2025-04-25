@@ -36,6 +36,7 @@ import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
 import { onMounted, ref } from "vue";
 import type { Product } from "../types.products";
 import { deleteProduct, getProducts } from "../services.products";
+import type { TableHeader } from "@/types";
 
 const isLoading = ref(false);
 const hasRequestFailed = ref(false);
@@ -48,9 +49,9 @@ const products = ref<Product[]>([]);
 
 const headers = [
   { title: "Name", value: "name" },
-  { title: "Price (€)", value: "price", sortable: true },
+  { title: "Price (EUR)", value: "price", sortable: true },
   { title: "Actions", value: "actions", align: "end" },
-];
+] as TableHeader[];
 
 const loadTable = () => {
   isLoading.value = true;

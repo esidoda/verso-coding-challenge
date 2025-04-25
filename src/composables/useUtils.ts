@@ -3,7 +3,10 @@ export function useUtils() {
     return value && typeof value === "object" && value.constructor === Object;
   }
 
-  function isDefined(value: any, treatEmptyStringAsDefined = false): boolean {
+  const isDefined = (
+    value: any,
+    treatEmptyStringAsDefined = false
+  ): boolean => {
     if (value === undefined || value === null || Number.isNaN(value)) {
       return false;
     }
@@ -17,12 +20,21 @@ export function useUtils() {
       return false;
     }
     return true;
-  }
+  };
 
-  function hasOnlyNumbers(value: string): boolean {
+  const hasOnlyNumbers = (value: string): boolean => {
     const regex = /^\d*\.?\d+$/;
     return regex.test(value);
-  }
+  };
 
-  return { isDefined, hasOnlyNumbers };
+  const getNestedProperty = (
+    obj: Record<string, any>,
+    key1: string,
+    key2?: string
+  ) => {
+    const val = obj?.[key1];
+    return key2 ? val?.[key2] : val;
+  };
+
+  return { isDefined, hasOnlyNumbers, getNestedProperty };
 }
