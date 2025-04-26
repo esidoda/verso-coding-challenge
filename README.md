@@ -1,6 +1,8 @@
-### Running the mock API (json-server)
+### Project Overview
 
-If your project relies on a mock backend, you can start json-server with the following command:
+This is a Vue.js application that allows users to create, edit and delete orders and products.
+
+### Running the mock API (json-server)
 
 This project uses json-server as a mock backend for development purposes. To start the mock server, run the following command:
 
