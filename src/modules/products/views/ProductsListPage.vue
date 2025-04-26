@@ -30,6 +30,7 @@ import type { Product } from "../types.products";
 import { deleteProduct, getProducts } from "../services.products";
 import { NOTIFICATION_TYPE, type TableHeader } from "@/types";
 import { useNotificationStore } from "@/stores/notificationStore";
+import { useUtils } from "@/composables/useUtils";
 
 const isLoading = ref(false);
 const hasRequestFailed = ref(false);
@@ -38,6 +39,8 @@ const showDeleteDialog = ref(false);
 const selectedProductIdForDeletion = ref<string | null>(null);
 
 const products = ref<Product[]>([]);
+
+const { sortByCreatedAtDesc } = useUtils();
 
 const headers = [
   { title: "Name", value: "name" },
@@ -48,8 +51,8 @@ const headers = [
 const loadTable = () => {
   isLoading.value = true;
   getProducts()
-    .then((response) => {
-      products.value = response;
+    .then((response: Product[]) => {
+      products.value = sortByCreatedAtDesc(response);
     })
     .catch(() => {
       hasRequestFailed.value = true;

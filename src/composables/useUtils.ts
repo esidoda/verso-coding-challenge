@@ -36,5 +36,12 @@ export function useUtils() {
     return key2 ? val?.[key2] : val;
   };
 
-  return { isDefined, hasOnlyNumbers, getNestedProperty };
+  const sortByCreatedAtDesc = <T extends { createdAt: string }>(items: T[]) => {
+    return items.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  };
+
+  return { isDefined, hasOnlyNumbers, getNestedProperty, sortByCreatedAtDesc };
 }

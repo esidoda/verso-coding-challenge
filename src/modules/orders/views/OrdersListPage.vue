@@ -35,6 +35,7 @@ import { deleteOrder, getOrders } from "../services.orders";
 import type { Order } from "../types.orders";
 import { NOTIFICATION_TYPE, type TableHeader } from "@/types";
 import { useNotificationStore } from "@/stores/notificationStore";
+import { useUtils } from "@/composables/useUtils";
 
 const isLoading = ref(false);
 const hasRequestFailed = ref(false);
@@ -45,6 +46,8 @@ const selectedOrderIdForDeletion = ref<string | null>(null);
 const orders = ref<Order[]>([]);
 
 const notificationStore = useNotificationStore();
+
+const { sortByCreatedAtDesc } = useUtils();
 
 const headers = [
   { title: "Order Number", value: "orderNumber" },
@@ -64,7 +67,7 @@ const loadTable = () => {
   isLoading.value = true;
   getOrders()
     .then((response) => {
-      orders.value = response;
+      orders.value = sortByCreatedAtDesc(response);
     })
     .catch(() => {
       hasRequestFailed.value = true;
