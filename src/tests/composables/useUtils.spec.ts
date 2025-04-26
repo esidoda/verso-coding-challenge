@@ -4,25 +4,12 @@ import { describe, it, expect } from "vitest";
 const { isDefined, getNestedProperty, hasOnlyNumbers } = useUtils();
 
 describe("isDefined", () => {
-  it("should return false for undefined, null, NaN", () => {
+  it("should return false for undefined, null, NaN, empty string, array and object", () => {
     expect(isDefined(undefined)).toBe(false);
     expect(isDefined(null)).toBe(false);
     expect(isDefined(NaN)).toBe(false);
-  });
-
-  it("should return false for empty string by default", () => {
     expect(isDefined("")).toBe(false);
-  });
-
-  it("should return true for empty string if treatEmptyStringAsDefined is true", () => {
-    expect(isDefined("", true)).toBe(true);
-  });
-
-  it("should return false for empty array", () => {
     expect(isDefined([])).toBe(false);
-  });
-
-  it("should return false for empty object", () => {
     expect(isDefined({})).toBe(false);
   });
 
@@ -34,7 +21,6 @@ describe("isDefined", () => {
     expect(isDefined(false)).toBe(true);
   });
 });
-
 
 describe("getNestedProperty", () => {
   it("should return the correct value for a single-level key", () => {

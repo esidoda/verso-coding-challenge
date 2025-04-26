@@ -37,7 +37,7 @@ docker build -t verso-challenge .
 Once the image is built, run the container using:
 
 ```bash
-docker run -p 3000:3000 aampere-challenge
+docker run -p 3000:3000 verso-challenge
 ```
 
 After running the container, open your browser and navigate to [http://localhost:3000](http://localhost:3000) to verify that the application is running inside the Docker container.

@@ -75,7 +75,8 @@ const emit = defineEmits<{
 
 const submitForm = async () => {
   if (productForm.value) {
-    const { isValid } = await productForm.value.validate();
+    await productForm.value.validate();
+    const isValid = productForm.value.isValid;
     if (isValid) {
       emit("save", product.value);
     }
