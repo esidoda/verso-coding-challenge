@@ -7,8 +7,8 @@ export interface Order {
   customerCompany: Company;
   supplierCompany: Company;
   totalAmount: number;
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: string;
+  updatedAt?: string;
 }
 
 export interface NewOrder {
@@ -17,7 +17,7 @@ export interface NewOrder {
   customerCompany: Company;
   supplierCompany: Company;
   totalAmount: number;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface OrderItem {
@@ -34,7 +34,7 @@ export const createEmptyOrder = (): NewOrder => {
   return {
     orderNumber: "",
     orderItems: [],
-    createdAt: new Date(),
+    createdAt: new Date().toISOString(),
     customerCompany: { id: "", name: "" },
     supplierCompany: { id: "", name: "" },
     totalAmount: 0,

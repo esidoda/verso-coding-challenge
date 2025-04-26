@@ -54,7 +54,7 @@ onMounted(() => {
 
 const updateExistingProduct = (productData: Product | NewProduct) => {
   const product = productData as Product;
-  product.updatedAt = new Date();
+  product.updatedAt = new Date().toISOString();
   isUpdatingProduct.value = true;
   updateProduct(product)
     .then(() => {

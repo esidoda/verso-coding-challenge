@@ -29,7 +29,7 @@ const showNotification = ref(false);
 const isSuccess = ref(false);
 
 const createNewProduct = (product: NewProduct) => {
-  product.createdAt = new Date();
+  product.createdAt = new Date().toISOString();
   isCreatingProduct.value = true;
   addProduct(product)
     .then(() => {

@@ -25,15 +25,15 @@ const registerRouterModule = (module: Module) => {
 };
 
 // To Register both store and router modules for a specific module
-const registerModule = (name: string, module: Module) => {
+const registerModule = ( module: Module) => {
   registerRouterModule(module);
 };
 
 // Register all modules
 export const registerModules = (modules: Record<string, Module>) => {
   // Iterate over each module
-  Object.entries(modules).forEach(([moduleName, module]: ModuleEntry) => {
+  Object.entries(modules).forEach(([_moduleName, module]: ModuleEntry) => {
     // Register the module
-    registerModule(moduleName, module);
+    registerModule(module);
   });
 };

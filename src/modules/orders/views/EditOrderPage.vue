@@ -44,7 +44,7 @@ const loadExistingOrder = () => {
 
 const updateExistingOrder = (orderData: NewOrder | Order) => {
   const order = orderData as Order;
-  order.updatedAt = new Date();
+  order.updatedAt = new Date().toISOString();
   isUpdatingOrder.value = true;
   updateOrder(order)
     .then(() => {

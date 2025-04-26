@@ -6,7 +6,7 @@
       :has-request-failed="hasRequestFailed"
       :headers="headers"
       :expandableHeaders="expandableHeaders"
-      expandableValue="orderItems"
+      expandableProperty="orderItems"
       :items="orders"
       search-label="Search Order"
       add-button-text="Add Order"
@@ -62,7 +62,7 @@ const headers = [
 const expandableHeaders = [
   { title: "Product", valueLevelOne: "product", valueLevelTwo: "name" },
   { title: "Price (EUR)", valueLevelOne: "product", valueLevelTwo: "price" },
-  { title: "Quantity", valueLevelOne: "quantity" },
+  { title: "Product Quantity", valueLevelOne: "quantity" },
 ] as TableHeader[];
 
 const loadTable = () => {

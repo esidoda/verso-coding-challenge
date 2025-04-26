@@ -1,5 +1,5 @@
 import useHttp from "../../composables/useHttp";
-import type { Company, Order } from "./types.orders";
+import type { Company, NewOrder, Order } from "./types.orders";
 
 export const getOrders = (): Promise<Order[]> => {
   return useHttp()
@@ -7,7 +7,7 @@ export const getOrders = (): Promise<Order[]> => {
     .then((response) => response.data);
 };
 
-export const addOrder = (order: Order): Promise<Order> => {
+export const addOrder = (order: NewOrder): Promise<Order> => {
   return useHttp()
     .http.post(`/orders`, order)
     .then((response) => response.data);

@@ -3,15 +3,15 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: string;
+  updatedAt?: string;
 }
 
 export interface NewProduct {
   name: string;
   description: string;
   price: number | null;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export const createEmptyProduct = (): NewProduct => {
@@ -19,6 +19,6 @@ export const createEmptyProduct = (): NewProduct => {
     name: "",
     price: null,
     description: "",
-    createdAt: new Date(),
+    createdAt: new Date().toISOString(),
   };
 };

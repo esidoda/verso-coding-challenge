@@ -18,7 +18,7 @@ import Notification from "@/components/Notification.vue";
 import OrderFrom from "../components/OrderForm.vue";
 import { nextTick, ref } from "vue";
 import { useRouter } from "vue-router";
-import { type Order } from "../types.orders";
+import { type NewOrder, type Order } from "../types.orders";
 import { addOrder } from "../services.orders";
 
 const isCreatingOrder = ref(false);
@@ -27,9 +27,10 @@ const isSuccess = ref(false);
 
 const router = useRouter();
 
-const createNewOrder = (order: Order) => {
+const createNewOrder = (orderData: Order | NewOrder) => {
+  const order = orderData as NewOrder;
   isCreatingOrder.value = true;
-  order.createdAt = new Date();
+  order.createdAt = new Date().toISOString();
   addOrder(order)
     .then(() => {
       isSuccess.value = true;

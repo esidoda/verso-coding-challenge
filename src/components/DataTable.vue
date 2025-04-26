@@ -35,6 +35,7 @@
       :type="'error'"
     />
     <v-data-table
+      v-else
       :items="items"
       :headers="headers"
       :search="search"
@@ -78,9 +79,9 @@
                 </thead>
 
                 <tbody>
-                  <template v-if="expandableValue">
+                  <template v-if="expandableProperty">
                     <tr
-                      v-for="(expandableItem, index) in item[expandableValue as keyof Entity]"
+                      v-for="(expandableItem, index) in item[expandableProperty as keyof Entity]"
                       :key="index"
                     >
                       <td
@@ -92,7 +93,7 @@
                         >
                           {{
                             getNestedProperty(
-                              expandableItem,
+                              (expandableItem as unknown as Record<string, any>),
                               header.valueLevelOne
                             )
                           }}
@@ -103,7 +104,7 @@
                         >
                           {{
                             getNestedProperty(
-                              expandableItem,
+                              (expandableItem as unknown as Record<string, any>),
                               header.valueLevelOne,
                               header.valueLevelTwo
                             )
@@ -136,6 +137,7 @@
             @click="onDeleteButtonClick(item)"
             class="px-1"
             min-width="20"
+            e2e-id="delete-button"
           >
             <v-icon dark>mdi-delete</v-icon>
           </v-btn>
@@ -165,13 +167,14 @@ const props = defineProps<{
   addButtonRoute: string;
   editButtonRoute: string;
   isExpandable?: boolean;
-  expandableValue?: string;
+  expandableProperty?: string;
   collapseText?: string;
 }>();
 
 type Entity = Order | Product;
 
 const { getNestedProperty } = useUtils();
+
 const router = useRouter();
 const search = ref("");
 
