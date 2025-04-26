@@ -28,7 +28,7 @@ const createNewOrder = (orderData: Order | NewOrder) => {
   addOrder(order)
     .then(() => {
       router.push({ name: "orders" });
-      notificationStore.showNotification(NOTIFICATION_TYPE.ERROR);
+      notificationStore.showNotification(NOTIFICATION_TYPE.SUCCESS);
     })
     .catch(() => {
       notificationStore.showNotification(NOTIFICATION_TYPE.ERROR);

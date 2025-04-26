@@ -73,10 +73,10 @@ const emit = defineEmits<{
   (e: "save", product: NewProduct | Product): void;
 }>();
 
-const submitForm = () => {
+const submitForm = async () => {
   if (productForm.value) {
-    productForm.value.validate();
-    if (productForm.value.isValid) {
+    const { isValid } = await productForm.value.validate();
+    if (isValid) {
       emit("save", product.value);
     }
   }

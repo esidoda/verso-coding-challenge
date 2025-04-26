@@ -3,9 +3,10 @@
     {
       "id": "1e5e",
       "name": "Product A",
-      "price": "30",
+      "price": "35",
       "description": "This is product A",
-      "createdAt": "2025-04-24T10:26:34.970Z"
+      "createdAt": "2025-04-24T10:26:34.970Z",
+      "updatedAt": "2025-04-26T09:53:43.882Z"
     },
     {
       "id": "22f5",
@@ -72,45 +73,17 @@
       "createdAt": "2025-04-24T11:13:13.467Z"
     },
     {
-      "id": "18ba",
+      "id": "2040",
       "name": "Product K",
-      "price": "48",
+      "price": "55",
       "description": "",
-      "createdAt": "2025-04-24T11:13:23.405Z"
+      "createdAt": "2025-04-26T09:41:17.158Z"
     }
   ],
   "orders": [
     {
-      "id": "cc3e",
-      "orderNumber": "O100",
-      "orderItems": [
-        {
-          "product": {
-            "id": "ecff",
-            "name": "Product H",
-            "price": "20",
-            "description": "",
-            "createdAt": "2025-04-24T11:12:58.798Z"
-          },
-          "quantity": 1
-        }
-      ],
-      "createdAt": "2025-04-25T13:30:27.108Z",
-      "supplierCompanyId": "6",
-      "customerCompanyId": "4",
-      "customerCompany": {
-        "id": "4",
-        "name": "Customer D"
-      },
-      "supplierCompany": {
-        "id": "6",
-        "name": "Supplier F"
-      },
-      "totalAmount": 20
-    },
-    {
-      "id": "064e",
-      "orderNumber": "ORD24",
+      "id": "5235",
+      "orderNumber": "OR001",
       "orderItems": [
         {
           "product": {
@@ -120,34 +93,8 @@
             "description": "This is product A",
             "createdAt": "2025-04-24T10:26:34.970Z"
           },
-          "quantity": 1
+          "quantity": "3"
         },
-        {
-          "product": {
-            "id": "007a",
-            "name": "Product F",
-            "price": "20",
-            "description": "",
-            "createdAt": "2025-04-24T11:12:37.044Z"
-          },
-          "quantity": 1
-        }
-      ],
-      "createdAt": "2025-04-25T13:31:10.908Z",
-      "customerCompany": {
-        "id": "1",
-        "name": "Customer A"
-      },
-      "supplierCompany": {
-        "id": "2",
-        "name": "Supplier B"
-      },
-      "totalAmount": 50
-    },
-    {
-      "id": "3731",
-      "orderNumber": "bw",
-      "orderItems": [
         {
           "product": {
             "id": "22f5",
@@ -157,18 +104,30 @@
             "createdAt": "2025-04-24T10:38:16.875Z"
           },
           "quantity": 1
+        },
+        {
+          "product": {
+            "id": "c282",
+            "name": "Product C",
+            "price": "45",
+            "description": "Updated",
+            "createdAt": "2025-04-24T10:57:30.823Z",
+            "updatedAt": "2025-04-24T10:59:02.419Z"
+          },
+          "quantity": 1
         }
       ],
-      "createdAt": "2025-04-25T14:41:37.464Z",
+      "createdAt": "2025-04-26T09:42:18.492Z",
       "customerCompany": {
         "id": "1",
         "name": "Customer A"
       },
       "supplierCompany": {
-        "id": "3",
-        "name": "Supplier C"
+        "id": "1",
+        "name": "Supplier A"
       },
-      "totalAmount": 50
+      "totalAmount": 185,
+      "updatedAt": "2025-04-26T09:58:30.530Z"
     }
   ],
   "suppliers": [

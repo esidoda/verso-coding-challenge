@@ -1,9 +1,5 @@
 <template>
-  <v-form
-    ref="orderForm"
-    class="mt-4 max-w-600 mx-auto"
-    @submit.prevent="submitForm"
-  >
+  <v-form ref="orderForm" class="mt-4 max-w-600 mx-auto">
     <p class="pb-4 font-weight-bold">Order Details</p>
 
     <v-row>
@@ -249,14 +245,14 @@ const prepareOrder = () => {
   order.value.totalAmount = totalAmount.value;
 };
 
-const submitForm = () => {
+const submitForm = async () => {
   if (orderForm.value) {
-    orderForm.value.validate();
+    const { valid } = await orderForm.value.validate();
     const isProductQuantityValid = productQuantity.value?.every((input) => {
       input.validate();
       return input.isValid;
     });
-    if (orderForm.value.isValid && isProductQuantityValid) {
+    if (valid && isProductQuantityValid) {
       prepareOrder();
       emit("save", order.value);
     }
