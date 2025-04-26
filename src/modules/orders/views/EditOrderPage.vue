@@ -8,11 +8,6 @@
         :is-saving="isUpdatingOrder"
       />
     </v-card>
-    <Notification
-      v-if="showNotification"
-      :show="showNotification"
-      :type="isSuccess ? 'success' : 'error'"
-    />
   </v-container>
 </template>
 
@@ -24,22 +19,27 @@ import { nextTick, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { type NewOrder, type Order } from "../types.orders";
 import { getOrder, updateOrder } from "../services.orders";
+import { useNotificationStore } from "@/stores/notificationStore";
+import { NOTIFICATION_TYPE } from "@/types";
 
 const isUpdatingOrder = ref(false);
-const showNotification = ref(false);
-const isSuccess = ref(false);
 
 const router = useRouter();
 const existingOrder = ref<Order>();
+const notificationStore = useNotificationStore();
 
 const loadExistingOrder = () => {
   const orderId = router.currentRoute.value.params.id as string;
   if (!orderId) {
     return;
   }
-  getOrder(orderId).then((response) => {
-    existingOrder.value = response;
-  });
+  getOrder(orderId)
+    .then((response) => {
+      existingOrder.value = response;
+    })
+    .catch(() => {
+      notificationStore.showNotification(NOTIFICATION_TYPE.ERROR);
+    });
 };
 
 const updateExistingOrder = (orderData: NewOrder | Order) => {
@@ -48,17 +48,14 @@ const updateExistingOrder = (orderData: NewOrder | Order) => {
   isUpdatingOrder.value = true;
   updateOrder(order)
     .then(() => {
-      isSuccess.value = true;
-      nextTick(() => {
-        router.push({ name: "orders" });
-      });
+      router.push({ name: "orders" });
+      notificationStore.showNotification(NOTIFICATION_TYPE.SUCCESS);
     })
     .catch(() => {
-      isSuccess.value = false;
+      notificationStore.showNotification(NOTIFICATION_TYPE.ERROR);
     })
     .finally(() => {
       isUpdatingOrder.value = false;
-      showNotification.value = true;
     });
 };
 

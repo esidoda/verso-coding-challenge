@@ -4,28 +4,22 @@
     <v-card class="pa-6 mt-10">
       <OrderFrom @save="createNewOrder" :is-saving="isCreatingOrder" />
     </v-card>
-    <Notification
-      v-if="showNotification"
-      :show="showNotification"
-      :type="isSuccess ? 'success' : 'error'"
-    />
   </v-container>
 </template>
 
 <script setup lang="ts">
 import TitleBar from "@/components/TitleBar.vue";
-import Notification from "@/components/Notification.vue";
 import OrderFrom from "../components/OrderForm.vue";
-import { nextTick, ref } from "vue";
 import { useRouter } from "vue-router";
 import { type NewOrder, type Order } from "../types.orders";
 import { addOrder } from "../services.orders";
+import { useNotificationStore } from "@/stores/notificationStore";
+import { NOTIFICATION_TYPE } from "@/types";
+import { ref } from "vue";
 
 const isCreatingOrder = ref(false);
-const showNotification = ref(false);
-const isSuccess = ref(false);
-
 const router = useRouter();
+const notificationStore = useNotificationStore();
 
 const createNewOrder = (orderData: Order | NewOrder) => {
   const order = orderData as NewOrder;
@@ -33,17 +27,14 @@ const createNewOrder = (orderData: Order | NewOrder) => {
   order.createdAt = new Date().toISOString();
   addOrder(order)
     .then(() => {
-      isSuccess.value = true;
-      nextTick(() => {
-        router.push({ name: "orders" });
-      });
+      router.push({ name: "orders" });
+      notificationStore.showNotification(NOTIFICATION_TYPE.ERROR);
     })
     .catch(() => {
-      isSuccess.value = false;
+      notificationStore.showNotification(NOTIFICATION_TYPE.ERROR);
     })
     .finally(() => {
       isCreatingOrder.value = false;
-      showNotification.value = true;
     });
 };
 </script>

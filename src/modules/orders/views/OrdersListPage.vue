@@ -17,12 +17,6 @@
       collapse-text="Products"
     />
 
-    <Notification
-      v-if="showNotification"
-      :show="showNotification"
-      :type="!hasRequestFailed ? 'success' : 'error'"
-    />
-
     <ConfirmationDialog
       v-model="showDeleteDialog"
       title="Are you sure you want to delete this order?"
@@ -34,22 +28,23 @@
 
 <script setup lang="ts">
 import TitleBar from "@/components/TitleBar.vue";
-import Notification from "@/components/Notification.vue";
 import DataTable from "@/components/DataTable.vue";
 import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
 import { onMounted, ref } from "vue";
 import { deleteOrder, getOrders } from "../services.orders";
 import type { Order } from "../types.orders";
-import type { TableHeader } from "@/types";
+import { NOTIFICATION_TYPE, type TableHeader } from "@/types";
+import { useNotificationStore } from "@/stores/notificationStore";
 
 const isLoading = ref(false);
 const hasRequestFailed = ref(false);
-const showNotification = ref(false);
 
 const showDeleteDialog = ref(false);
 const selectedOrderIdForDeletion = ref<string | null>(null);
 
 const orders = ref<Order[]>([]);
+
+const notificationStore = useNotificationStore();
 
 const headers = [
   { title: "Order Number", value: "orderNumber" },
@@ -87,12 +82,10 @@ const onConfirmedDelete = () => {
       orders.value = orders.value.filter(
         (order: Order) => order.id !== selectedOrderIdForDeletion.value
       );
+      notificationStore.showNotification(NOTIFICATION_TYPE.SUCCESS);
     })
     .catch(() => {
-      hasRequestFailed.value = true;
-    })
-    .finally(() => {
-      showNotification.value = true;
+      notificationStore.showNotification(NOTIFICATION_TYPE.ERROR);
     });
 };
 
